@@ -1,0 +1,46 @@
+*{
+    margin: 0;
+    padding: 0;
+    user-select: none;
+    /*禁止图片拖拽*/
+    -webkit-user-drag: none;
+}
+.clears{
+    clear: both;
+    height:0;
+    overflow: hidden;
+    line-height: 0;
+    font-size: 0;
+}
+ul,ol,li{
+    list-style: none;
+}
+a{
+    text-decoration:none;/*取消下划线*/
+}
+button{
+    cursor: pointer;/*光标变为手势*/
+}
+input,button,select,textarea{
+    outline: none;
+}
+textarea{
+    resize: none;
+}
+/* 禁用垂直滚动条 */
+::-webkit-scrollbar {
+    width: 0;
+}
+.left{
+    float: left;
+}
+.right{
+    float: right;
+}
+body{
+    overflow: hidden;
+    background-color: #fbfbfb;
+}
+input{
+    background-color: #fbfbfb;
+}

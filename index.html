@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/cart/css/public.css">
+    <link rel="stylesheet" href="/cart/css/style.css">
+    <script src="/cart/js/vue.global.js"></script>
+    <script src="/cart/js/axios.min.js"></script>
+</head>
+<body>
+    <div id="app"></div>
+    <template id="root">
+        <!-- Search -->
+        <div class="search">
+            <input type="text">
+            <button>搜索</button>
+        </div>
+        <!-- 分类 -->
+        <div class="type">
+            <ul>
+                <li v-for="(item, index) in type" @click="chose(index)" :class=className[index]>
+                    {{item}}
+                </li>
+            </ul>
+        </div>
+        <!-- 商品列表 -->
+        <div class="goods">
+            <ul>
+                <li v-for="item in goods[index]" class="left">
+                    <img :src="item.url" alt="">
+                    <span class="intro">{{item.intro}}</span>
+                    <span class="unit left">¥</span>
+                    <span class="price left">{{item.price}}</span>
+                    <button class="right" @click="add(item)">添加到购物车</button>
+                </li>
+            </ul>
+        </div>
+        <!-- 购物车 -->
+        <div v-if="cart.length > 0" class="cart">
+            <!-- 购物车商品列表 -->
+            <div class="goods_list">
+                <ul>
+                    <li v-for="item in cart">
+                        <input type="checkbox" class="check left" v-model="item.checked">
+                        <img :src="item.url" alt="" class="left">
+                        <span class="cart_intro left">{{item.intro}}</span>
+                        <button class="lbtn left" @click="decreament(item)">-</button>
+                        <input type="text" class="number left" v-model="item.count">
+                        <button class="Rbtn left" @click="increament(item)">+</button>
+                        <span class="unit left cart_unit">¥</span>
+                        <span class="price left cart_price">{{getprice(item)}}</span>
+                        <select v-model="item.discount" class="left discount">
+                            <option value="1">使用优惠卷</option>
+                            <option value="0.9">10%</option>
+                            <option value="0.8">20%</option>
+                        </select>
+                        <button class="left cart_delete" @click="del(item)">移出购物车</button>
+                    </li>
+                </ul>
+            </div>
+            <!-- 购物车支付 -->
+            <div class="pay">
+                <button class="right">支付</button>
+                <span class="right pay_total">{{total}}</span>
+                <span class="right pay_unit">¥</span>
+                <span class="right pay_words">总计</span>
+                <input type="checkbox" class="left" v-model="checkall">
+                <button class="left checkall" @click="checkedall()">全选</button>
+                <button class="left uncheckall" @click="uncheckall()">全不选</button>
+            </div>
+        </div>
+    </template>
+
+    <script src="/cart/js/cart.js"></script>
+</body>
+</html>
